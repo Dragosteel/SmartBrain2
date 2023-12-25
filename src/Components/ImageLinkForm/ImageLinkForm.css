@@ -1,0 +1,6 @@
+.palete {
+    background: linear-gradient(135deg, #45b5e480 50%, transparent 0), linear-gradient(-135deg, #45b5e480 50%, transparent 0);
+    background-size: 1em 1em;
+    background-color: #36517c;
+    opacity: 1
+}
