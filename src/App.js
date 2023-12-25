@@ -1,4 +1,5 @@
 import react from "react";
+import ParticlesJS from './Components/ParticlesJS/ParticlesJS';
 import Nav from './Components/Nav/Nav';
 import Userdata from './Components/Userdata/Userdata';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
@@ -11,6 +12,7 @@ class App extends react.Component {
         <Nav />
         <Userdata />
         <ImageLinkForm />
+        <ParticlesJS />
       </>
     );
   }
