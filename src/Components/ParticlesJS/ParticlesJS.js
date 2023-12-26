@@ -23,14 +23,9 @@ const ParticlesJS = () => {
         });
     }, []);
 
-    const particlesLoaded = (container) => {
-        console.log(container);
-    };
-
     return (
         { init }, <Particles
             id="tsparticles"
-            particlesLoaded={particlesLoaded}
             options={{
                 fpsLimit: 120,
                 interactivity: {
@@ -81,7 +76,7 @@ const ParticlesJS = () => {
                             enable: true,
                             area: 800,
                         },
-                        value: 80,
+                        value: 125,
                     },
                     opacity: {
                         value: 0.5,
