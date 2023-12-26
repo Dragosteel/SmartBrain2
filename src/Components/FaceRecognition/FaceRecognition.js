@@ -1,11 +1,13 @@
 import React from "react";
+import './FaceRecognition.css';
 
-const FaceRecognition = ({ imageUrl }) => {
+const FaceRecognition = ({ box, imageUrl }) => {
     if (imageUrl) {
         return (
             <div className="flex place-content-center">
-                <div className="w-auto h-96 mt-5 flex place-content-center">
-                    <img alt="Faces" src={imageUrl} width="auto" height="100%" />
+                <div className="absolute mt-2">
+                    <img id="inputimage" className="max-h-96" alt="Faces" src={imageUrl} width="auto" />
+                    <div className="boundarybox" style={{ top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol }}></div>
                 </div>
             </div>
         );

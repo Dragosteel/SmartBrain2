@@ -5,7 +5,7 @@ const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
     return (
         <div>
             <div className="mt-2 text-xl text-amber-400 capitalize flex place-content-center">
-                this smart brain will detect number of faces in your picture
+                this smart brain will detect the faces in your picture
             </div>
             <div className="text-xl text-amber-400 capitalize flex place-content-center">
                 just give it a try

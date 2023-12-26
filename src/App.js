@@ -13,6 +13,19 @@ class App extends react.Component {
     this.state = {
       input: '',
       imageUrl: '',
+      box: {},
+    }
+  }
+
+  calculateBoxBoundary = (data) => {
+    const image = document.getElementById('inputimage');
+    const imageWidth = Number(image.width);
+    const imageHeight = Number(image.height);
+    return {
+      topRow: data.top_row * imageHeight,
+      leftCol: data.left_col * imageWidth,
+      bottomRow: imageHeight - (data.bottom_row * imageHeight),
+      rightCol: imageWidth - (data.right_col * imageWidth)
     }
   }
 
@@ -79,22 +92,14 @@ class App extends react.Component {
         regions.forEach(region => {
           // Accessing and rounding the bounding box values
           const boundingBox = region.region_info.bounding_box;
-          const topRow = boundingBox.top_row.toFixed(3);
-          const leftCol = boundingBox.left_col.toFixed(3);
-          const bottomRow = boundingBox.bottom_row.toFixed(3);
-          const rightCol = boundingBox.right_col.toFixed(3);
-
-          region.data.concepts.forEach(concept => {
-            // Accessing and rounding the concept value
-            const name = concept.name;
-            const value = concept.value.toFixed(4);
-
-            console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
-
-          });
+          this.displayBoxBoundaries(this.calculateBoxBoundary(boundingBox));
         });
       })
       .catch(error => console.log('error', error));
+  }
+
+  displayBoxBoundaries = (box) => {
+    this.setState({ box: box });
   }
 
   onInputChange = (event) => {
@@ -103,7 +108,7 @@ class App extends react.Component {
 
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    this.API(this.state.imageUrl);
+    this.API(this.state.input);
   }
 
   render() {
@@ -113,7 +118,7 @@ class App extends react.Component {
         <Nav />
         <Userdata />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onSubmit} />
-        <FaceRecognition imageUrl={this.state.imageUrl} />
+        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
       </>
     );
   }
