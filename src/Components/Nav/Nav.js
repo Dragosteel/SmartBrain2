@@ -2,7 +2,7 @@ import React from "react";
 import './Nav.css';
 import logo from './images/logo.png';
 
-const Nav = () => {
+const Nav = ({ routeChange, isSignedIn }) => {
     return (
         <div className="flex justify-between">
             <div className="logo animate-pulse mx-5 my-5 p-1 border-2 rounded-md border-slate-300">
@@ -11,11 +11,25 @@ const Nav = () => {
                     smart brain
                 </p>
             </div>
-            <nav className="mx-5 my-8">
-                <span className="mx-1 border-2 p-1.5 text-slate-300 border-slate-300 rounded-full text-md font-medium uppercase cursor-pointer hover:text-black hover:border-black">
-                    sign out
-                </span>
-            </nav>
+            {(isSignedIn) ?
+                <nav className="mx-5 my-8">
+                    <span
+                        onClick={() => routeChange('signout')}
+                        className="mx-1 border-2 p-1.5 text-slate-300 border-slate-300 rounded-full text-md font-medium uppercase cursor-pointer hover:text-black hover:border-black"
+                    >log out</span>
+                </nav>
+                :
+                <nav className="mx-5 my-8">
+                    <span
+                        onClick={() => routeChange('signin')}
+                        className="mx-1 border-2 p-1.5 text-slate-300 border-slate-300 rounded-full text-md font-medium uppercase cursor-pointer hover:text-black hover:border-black"
+                    >log In</span>
+                    <span
+                        onClick={() => routeChange('register')}
+                        className="mx-1 border-2 p-1.5 text-slate-300 border-slate-300 rounded-full text-md font-medium uppercase cursor-pointer hover:text-black hover:border-black"
+                    >Register</span>
+                </nav>
+            }
         </div>
     );
 }

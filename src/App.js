@@ -1,5 +1,7 @@
 import react from "react";
 import ParticlesJS from './Components/ParticlesJS/ParticlesJS';
+import Signin from "./Components/Signin/Signin";
+import Register from "./Components/Register/Register";
 import Nav from './Components/Nav/Nav';
 import Userdata from './Components/Userdata/Userdata';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
@@ -14,6 +16,8 @@ class App extends react.Component {
       input: '',
       imageUrl: '',
       box: {},
+      route: 'signin',
+      isSignedIn: false,
     }
   }
 
@@ -111,14 +115,33 @@ class App extends react.Component {
     this.API(this.state.input);
   }
 
+  routeChange = (route) => {
+    if (route === 'signout') {
+      this.setState({ isSignedIn: false })
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true })
+    }
+    this.setState({ route: route });
+  }
+
   render() {
+    const { isSignedIn, route, imageUrl, box } = this.state
     return (
       <>
         <ParticlesJS />
-        <Nav />
-        <Userdata />
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onSubmit} />
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+        <Nav routeChange={this.routeChange} isSignedIn={isSignedIn} />
+        {
+          route === 'home' ?
+            <>
+              <Userdata />
+              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onSubmit} />
+              <FaceRecognition box={box} imageUrl={imageUrl} />
+            </>
+            : route === 'register' ?
+              <Register routeChange={this.routeChange} />
+              :
+              <Signin routeChange={this.routeChange} />
+        }
       </>
     );
   }
